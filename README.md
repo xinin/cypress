@@ -1,9 +1,9 @@
 # Cypress End to End 
 ## Docker image to integrate with your CI process
 
-Using the image of **Centos7** all the necessary dependencies for the execution of Cypress are installed.
+Based on an image of **Centos7** with all the necessary dependencies for the execution of Cypress are installed.
 
-Integrated with Mochawesome and available to test with **Chrome** and **Electron**.
+It is integrated with Mochawesome. The available browsers are **Chrome** and **Electron**.
 
 >*Firefox* is preconfigured for when Cypress has it supported.
 ---
