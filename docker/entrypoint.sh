@@ -1,12 +1,15 @@
 #!/bin/sh
 echo "🐋  Starting ..."
 
-pwd
+browser=$BROWSER
 
-ls -l
+echo "BROWSER"$browser
 
-
-#npm i
-#cypress install
-
-npm test
+if [ "$browser" == "chrome" ]
+then
+  echo "🦄 You are using Google Chrome"
+  $(npm bin)/cypress run --reporter mochawesome --browser chrome
+else
+  echo "⚡️ You are using Electron"
+  $(npm bin)/cypress run --reporter mochawesome
+fi

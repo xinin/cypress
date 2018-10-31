@@ -1,6 +1,0 @@
-docker build -t cypress .
-
-docker run -v /Users/n139390/workspace/cypress/webpublic-test/:/cypress cypress:latest
-
-
-docker run -v /Users/n139390/workspace/cypress/webpublic-test/:/cypress/cypress/integration cypress:latest
