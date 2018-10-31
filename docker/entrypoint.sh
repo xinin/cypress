@@ -3,13 +3,7 @@ echo "🐋  Starting ..."
 
 pwd
 
-ls -l 
-
-npm i
-
-pwd
-
-ls -l 
+ls -l
 
 
 #npm i
