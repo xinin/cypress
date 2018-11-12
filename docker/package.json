@@ -1,17 +1,13 @@
 {
-  "name": "webpublic-test",
-  "version": "1.0.0",
-  "description": "",
+  "name": "cypress-env",
+  "version": "1.1.0",
+  "description": "Cypress Docker Image CI/CD",
   "main": "index.js",
-  "scripts": {
-    "test": "cypress run --reporter mochawesome",
-    "start": "cypress open"
-  },
-  "author": "",
+  "author": "Diego Prieto Torrijos",
   "license": "ISC",
   "dependencies": {
     "mocha": "^5.2.0",
     "mochawesome": "^3.1.1",
-    "cypress": "latest"
+    "cypress": "^3.1.1"
   }
 }
