@@ -18,7 +18,7 @@ if [ "$BROWSER" == "chrome" ]; then
   $(npm bin)/cypress run --browser chrome
 else
   echo "⚡️ You are using Electron"
-  $(npm bin)/cypress run mochawesome
+  $(npm bin)/cypress run
 fi
 
 if [ -n "$S3" ] && [ -n "$REGION" ]; then
