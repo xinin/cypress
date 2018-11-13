@@ -34,15 +34,19 @@ You have to provide the directory where all your ***.spec.js** are.
 
 For example:
 ~~~
-docker run -v $(pwd)/tests-directory/:/opt/cypressEnv/cypress/integration cypress-env:latest
+docker run -v $(pwd)/test-directory/:/opt/cypressEnv/cypress/integration cypress-env:latest
 ~~~
+
+You can also use **S3_SOURCE** parameter to give it a bucket to download the tests from.
+
 ---
 ### Execution Parameters
 
 * **CYPRESS_CONF**: Parameter Store variable where the cypress.json file is stored.
 * **CYPRESS_ENV**: Parameter Store variable where the cypress.env.json file is stored.
 * **REGION**: AWS region.
-* **S3**: S3 bucket where store the result of the execution of the tests.
+* **S3_REPORTS**: S3 bucket where store the result of the execution of the tests.
+* **S3_SOURCE**: S3 bucket where store the tests specs.
 * **NAMESPACE**: Namespace of Cloudwatch metrics.
 * **METRIC_OK**: Metric where to store the results of completed tests.
 * **METRIC_KO**: Metric where to store the result of failed tests.
@@ -51,21 +55,37 @@ docker run -v $(pwd)/tests-directory/:/opt/cypressEnv/cypress/integration cypres
 It is **recommended** to specify the parameter **REGION** always.
 
 If you want to dump the result to Cloudwatch, the three parameters **NAMESPACE**, **METRIC_OK** and **METRIC_KO** must be specified. 
->Only works with Mochawesome reporter.
+>CloudWatch only works with Mochawesome reporter.
 
-#### Example
+#### Examples
+Run local tests
 ~~~
-docker run -v $(pwd)/tests-directory/:/opt/cypressEnv/cypress/integration \
+docker run -v $(pwd)/test-directory/:/opt/cypressEnv/cypress/integration \
            -e "BROWSER=chrome" \
            -e "CYPRESS_CONF=/cypress/config" \
            -e "CYPRESS_ENV=/cypress/env" \
            -e "REGION=eu-west-1" \
-           -e "S3=cypressReports" \
+           -e "S3_REPORTS=cypressReports" \
            -e "NAMESPACE=cypressMetrics" \
            -e "METRIC_OK=metricOk" \
            -e "METRIC_KO=metricKo" \
            cypress:latest
 ~~~
+
+Run S3 tests
+~~~
+docker run -e "BROWSER=chrome" \
+           -e "CYPRESS_CONF=/cypress/config" \
+           -e "CYPRESS_ENV=/cypress/env" \
+           -e "REGION=eu-west-1" \
+           -e "S3_REPORTS=cypressReports" \
+           -e "S3_SOURCE=cypressTests/release_1" \
+           -e "NAMESPACE=cypressMetrics" \
+           -e "METRIC_OK=metricOk" \
+           -e "METRIC_KO=metricKo" \
+           cypress:latest
+~~~
+
 ---
 # TODO
 * Build the CI/CD pipeline
