@@ -42,6 +42,7 @@ You can also use **S3_SOURCE** parameter to give it a bucket to download the tes
 ---
 ### Execution Parameters
 
+* **BROWSER**: electron *(default)* | chrome | firefox *([soon™](https://www.urbandictionary.com/define.php?term=soon%E2%84%A2))*
 * **CYPRESS_CONF**: Parameter Store variable where the cypress.json file is stored.
 * **CYPRESS_ENV**: Parameter Store variable where the cypress.env.json file is stored.
 * **REGION**: AWS region.
@@ -50,7 +51,7 @@ You can also use **S3_SOURCE** parameter to give it a bucket to download the tes
 * **NAMESPACE**: Namespace of Cloudwatch metrics.
 * **METRIC_OK**: Metric where to store the results of completed tests.
 * **METRIC_KO**: Metric where to store the result of failed tests.
-* **BROWSER**: electron *(default)* | chrome | firefox *([soon™](https://www.urbandictionary.com/define.php?term=soon%E2%84%A2))*
+* **DIMENSIONS**: Optional Cloudwatch parameter to specify metrics dimensions.
 
 It is **recommended** to specify the parameter **REGION** always.
 
@@ -58,6 +59,22 @@ If you want to dump the result to Cloudwatch, the three parameters **NAMESPACE**
 >CloudWatch only works with Mochawesome reporter.
 
 #### Examples
+Example cypress.json with Mochawesome and Electron 
+~~~
+{
+    "viewportHeight": 1080,
+    "viewportWidth": 1200,
+    "video": false,
+    "reporter": "mochawesome",
+    "reporterOptions": {
+        "overwrite": false, //important when you have multiple tests suites
+        "html": true,
+        "json": true,
+        "cdn": true
+    }  
+}
+~~~
+
 Run local tests
 ~~~
 docker run -v $(pwd)/test-directory/:/opt/cypressEnv/cypress/integration \
@@ -83,9 +100,9 @@ docker run -e "BROWSER=chrome" \
            -e "NAMESPACE=cypressMetrics" \
            -e "METRIC_OK=metricOk" \
            -e "METRIC_KO=metricKo" \
+           -e "DIMENSIONS=project=my-project,release=1.2" \
            cypress:latest
 ~~~
-
 ---
 # TODO
 * Build the CI/CD pipeline
