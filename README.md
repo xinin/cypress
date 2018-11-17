@@ -67,7 +67,6 @@ Example cypress.json with Mochawesome and Electron
     "video": false,
     "reporter": "mochawesome",
     "reporterOptions": {
-        "overwrite": false, //important when you have multiple tests suites
         "html": true,
         "json": true,
         "cdn": true
